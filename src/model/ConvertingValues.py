@@ -125,6 +125,36 @@ class ConvertingValues:
 
         return round(freq_khz / lsb / 100)
 
+    # конвертация периода из ms в us
+    # 1 LSB = 5 ns
+    # Valid range : 300 us to 1.342 s
+    def periodicity_translation(self, period):
+        lsb = 5
+
+        period_us = self.convert_ms_ns(period)
+
+        return round(period_us / lsb)
+
+    # конвертация задержки из mсs в us
+    # 1 LSB = 5 ns
+    # Typical range is 0 to 100 micro seconds
+    def delay_translation(self, delay):
+        lsb = 5
+
+        delay_us = self.convert_mcs_ns(delay)
+
+        return round(delay_us / lsb)
+
+    # ms to us converter
+    @staticmethod
+    def convert_ms_ns(period):
+        return period * 10**6
+
+    # mcs to us converter
+    @staticmethod
+    def convert_mcs_ns(period):
+        return period * 10**3
+
     # GHz to Hz converter
     @staticmethod
     def convert_ghz_hz(freq):
