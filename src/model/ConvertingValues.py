@@ -102,6 +102,29 @@ class ConvertingValues:
     def tx_start_time_converter(tx_start_time):
         return int(tx_start_time * 100)
 
+    # Максимальное значение = 449.9 MHz
+    # 1 LSB = 3.6e9/2^26 = 53.644 Hz
+    # valid range = 0-8388607
+    def start_freq_var_translation(self, freq):
+        lsb = 53.644
+
+        max_value = 8_388_607
+
+        freq_hz = self.convert_mhz_hz(freq)
+        res = round(freq_hz / lsb)
+
+        return res if res < max_value else max_value
+
+    # Максимальный уклон для сенсора AWR1243 = 3041,577 KHz/uS
+    # 1 LSB = (3.6e6 * 900) / 2^26 = 48.279 kHz/uS
+    # Valid range: 0 to 63
+    def freq_slope_var_translation(self, freq_slope):
+        lsb = 48.279
+
+        freq_khz = self.convert_mhz_khz(freq_slope)
+
+        return round(freq_khz / lsb / 100)
+
     # GHz to Hz converter
     @staticmethod
     def convert_ghz_hz(freq):
