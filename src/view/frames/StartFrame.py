@@ -1,18 +1,14 @@
-import yaml
-import importlib.resources
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFrame, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QGroupBox, \
-    QSpinBox, QFormLayout, QCheckBox, QGridLayout, QComboBox
+    QSpinBox, QFormLayout, QCheckBox, QGridLayout, QComboBox, QSizePolicy
 
 
 class StartFrame(QFrame):
 
-    def __init__(self):
+    def __init__(self, strings: dict):
         super(StartFrame, self).__init__()
 
-        self.strings = {}
-        with importlib.resources.path("resources.strings", 'strings.yaml') as path:
-            with open(path) as f:
-                self.strings = yaml.safe_load(f)
+        self.strings = strings
 
         # Main layout
         self.main_layout = QVBoxLayout()
@@ -30,25 +26,26 @@ class StartFrame(QFrame):
         # Tx0
         self.form_layout_Tx0 = QFormLayout()
         self.Tx0 = QLabel(self.strings['StartFrame']['channel_Tx'][2])
-        self.Tx0_sb = QCheckBox()
-        self.Tx0_sb.setChecked(True)
+        self.Tx0_cb = QCheckBox()
+        self.Tx0_cb.setChecked(True)
         self.form_layout_Tx0.setWidget(0, QFormLayout.ItemRole.LabelRole, self.Tx0)
-        self.form_layout_Tx0.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Tx0_sb)
+        self.form_layout_Tx0.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Tx0_cb)
         self.grid_layout_ch_config.addLayout(self.form_layout_Tx0, 0, 1)
         # Tx1
         self.Tx1 = QLabel(self.strings['StartFrame']['channel_Tx'][3])
         self.form_layout_Tx1 = QFormLayout()
-        self.Tx1_sb = QCheckBox()
-        self.Tx1_sb.setChecked(True)
+        self.Tx1_cb = QCheckBox()
+        self.Tx1_cb.setChecked(True)
         self.form_layout_Tx1.setWidget(0, QFormLayout.ItemRole.LabelRole, self.Tx1)
-        self.form_layout_Tx1.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Tx1_sb)
+        self.form_layout_Tx1.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Tx1_cb)
         self.grid_layout_ch_config.addLayout(self.form_layout_Tx1, 0, 2)
         # Tx2
         self.Tx2 = QLabel(self.strings['StartFrame']['channel_Tx'][4])
         self.form_layout_Tx2 = QFormLayout()
-        self.Tx2_sb = QCheckBox()
+        self.Tx2_cb = QCheckBox()
+        self.Tx2_cb.setEnabled(False)
         self.form_layout_Tx2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.Tx2)
-        self.form_layout_Tx2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Tx2_sb)
+        self.form_layout_Tx2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Tx2_cb)
         self.grid_layout_ch_config.addLayout(self.form_layout_Tx2, 0, 3)
         # channelRx
         self.channel_Rx = QLabel(self.strings['StartFrame']['channel_Rx'][0])
@@ -57,44 +54,52 @@ class StartFrame(QFrame):
         # Rx0
         self.form_layout_Rx0 = QFormLayout()
         self.Rx0 = QLabel(self.strings['StartFrame']['channel_Rx'][2])
-        self.Rx0_sb = QCheckBox()
-        self.Rx0_sb.setChecked(True)
+        self.Rx0_cb = QCheckBox()
+        self.Rx0_cb.setChecked(True)
         self.form_layout_Rx0.setWidget(0, QFormLayout.ItemRole.LabelRole, self.Rx0)
-        self.form_layout_Rx0.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx0_sb)
+        self.form_layout_Rx0.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx0_cb)
         self.grid_layout_ch_config.addLayout(self.form_layout_Rx0, 1, 1)
         # Rx1
         self.Rx1 = QLabel(self.strings['StartFrame']['channel_Rx'][3])
         self.form_layout_Rx1 = QFormLayout()
-        self.Rx1_sb = QCheckBox()
-        self.Rx1_sb.setChecked(True)
+        self.Rx1_cb = QCheckBox()
+        self.Rx1_cb.setChecked(True)
         self.form_layout_Rx1.setWidget(0, QFormLayout.ItemRole.LabelRole, self.Rx1)
-        self.form_layout_Rx1.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx1_sb)
+        self.form_layout_Rx1.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx1_cb)
         self.grid_layout_ch_config.addLayout(self.form_layout_Rx1, 1, 2)
         # Rx2
         self.Rx2 = QLabel(self.strings['StartFrame']['channel_Rx'][4])
         self.form_layout_Rx2 = QFormLayout()
-        self.Rx2_sb = QCheckBox()
-        self.Rx2_sb.setChecked(True)
+        self.Rx2_cb = QCheckBox()
+        self.Rx2_cb.setChecked(True)
         self.form_layout_Rx2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.Rx2)
-        self.form_layout_Rx2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx2_sb)
+        self.form_layout_Rx2.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx2_cb)
         self.grid_layout_ch_config.addLayout(self.form_layout_Rx2, 1, 3)
         # Rx3
         self.Rx3 = QLabel(self.strings['StartFrame']['channel_Rx'][5])
         self.form_layout_Rx3 = QFormLayout()
-        self.Rx3_sb = QCheckBox()
-        self.Rx3_sb.setChecked(True)
+        self.Rx3_cb = QCheckBox()
+        self.Rx3_cb.setChecked(True)
         self.form_layout_Rx3.setWidget(0, QFormLayout.ItemRole.LabelRole, self.Rx3)
-        self.form_layout_Rx3.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx3_sb)
+        self.form_layout_Rx3.setWidget(0, QFormLayout.ItemRole.FieldRole, self.Rx3_cb)
         self.grid_layout_ch_config.addLayout(self.form_layout_Rx3, 1, 4)
+        # Degree resolution
+        self.degree_resolution_label = QLabel(self.strings['StartFrame']['degree_resolution'][0])
+        self.grid_layout_ch_config.addWidget(self.degree_resolution_label, 2, 0)
+        # Degree val
+        self.degree_val_label = QLabel(self.strings['StartFrame']['degree_resolution'][1])
+        self.grid_layout_ch_config.addWidget(self.degree_val_label, 2, 1)
         # Cascading Mode
         self.cascading_Mode = QLabel(self.strings['StartFrame']['cascading_Mode'][0])
         self.cascading_Mode.setToolTip(self.strings['StartFrame']['cascading_Mode'][1])
-        self.grid_layout_ch_config.addWidget(self.cascading_Mode, 2, 0)
+        self.grid_layout_ch_config.addWidget(self.cascading_Mode, 3, 0)
         self.cascading_Mode_cb = QComboBox()
         self.cascading_Mode_cb.addItem(self.strings['StartFrame']['cascading_Mode'][2], 0)
         self.cascading_Mode_cb.addItem(self.strings['StartFrame']['cascading_Mode'][3], 1)
         self.cascading_Mode_cb.addItem(self.strings['StartFrame']['cascading_Mode'][4], 2)
-        self.grid_layout_ch_config.addWidget(self.cascading_Mode_cb, 2, 1)
+        self.cascading_Mode_cb.model().item(1).setEnabled(False)
+        self.cascading_Mode_cb.model().item(2).setEnabled(False)
+        self.grid_layout_ch_config.addWidget(self.cascading_Mode_cb, 3, 1)
 
         # ADC out configuration parameters gb
         self.ADC_out_config_gb = QGroupBox(self.strings['StartFrame']['GroupBoxes'][1])
@@ -121,6 +126,13 @@ class StartFrame(QFrame):
         self.adc_Format_cb.setCurrentIndex(2)
         self.form_layout_adc_conf.setWidget(1, QFormLayout.ItemRole.LabelRole, self.adc_Format)
         self.form_layout_adc_conf.setWidget(1, QFormLayout.ItemRole.FieldRole, self.adc_Format_cb)
+        # IQ swap
+        self.iq_swap = QLabel(self.strings['StartFrame']['iqSwapSel'][0])
+        self.iq_swap_cb = QComboBox()
+        self.iq_swap_cb.addItem(self.strings['StartFrame']['iqSwapSel'][1], 0)
+        self.iq_swap_cb.addItem(self.strings['StartFrame']['iqSwapSel'][2], 1)
+        self.form_layout_adc_conf.setWidget(2, QFormLayout.ItemRole.LabelRole, self.iq_swap)
+        self.form_layout_adc_conf.setWidget(2, QFormLayout.ItemRole.FieldRole, self.iq_swap_cb)
         self.ADC_out_config_gb.setLayout(self.form_layout_adc_conf)
 
         # Low Power configuration mode gb
@@ -133,6 +145,7 @@ class StartFrame(QFrame):
         self.lp_Adc_Mode_cb = QComboBox()
         self.lp_Adc_Mode_cb.addItem(self.strings['StartFrame']['lp_Adc_Mode'][2], 0)
         self.lp_Adc_Mode_cb.addItem(self.strings['StartFrame']['lp_Adc_Mode'][3], 1)
+        self.lp_Adc_Mode_cb.model().item(1).setEnabled(False)
         self.form_layout_lp_config.setWidget(0, QFormLayout.ItemRole.LabelRole, self.lp_Adc_Mode)
         self.form_layout_lp_config.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lp_Adc_Mode_cb)
         self.LP_config_gb.setLayout(self.form_layout_lp_config)
@@ -147,8 +160,8 @@ class StartFrame(QFrame):
         self.data_Path_cb = QComboBox()
         self.data_Path_cb.addItem(self.strings['StartFrame']['data_Path'][2], 0)
         self.data_Path_cb.addItem(self.strings['StartFrame']['data_Path'][3], 1)
-        self.data_Path_cb.addItem(self.strings['StartFrame']['data_Path'][4], 2)
         self.data_Path_cb.setCurrentIndex(1)
+        self.data_Path_cb.model().item(0).setEnabled(False)
         self.form_layout_dp_conf.setWidget(0, QFormLayout.ItemRole.LabelRole, self.data_Path)
         self.form_layout_dp_conf.setWidget(0, QFormLayout.ItemRole.FieldRole, self.data_Path_cb)
         # Transfer Format Packet 0
@@ -159,6 +172,7 @@ class StartFrame(QFrame):
         self.Pkt0_cb.addItem(self.strings['StartFrame']['Pkt0'][3], 1)
         self.Pkt0_cb.addItem(self.strings['StartFrame']['Pkt0'][4], 2)
         self.Pkt0_cb.addItem(self.strings['StartFrame']['Pkt0'][5], 3)
+        self.Pkt0_cb.setCurrentIndex(1)
         self.form_layout_dp_conf.setWidget(1, QFormLayout.ItemRole.LabelRole, self.Pkt0)
         self.form_layout_dp_conf.setWidget(1, QFormLayout.ItemRole.FieldRole, self.Pkt0_cb)
         # Transfer Format Packet 1
@@ -216,21 +230,25 @@ class StartFrame(QFrame):
         self.lane_CLK_cb = QComboBox()
         self.lane_CLK_cb.addItem(self.strings['StartFrame']['lane_CLK'][2], 0)
         self.lane_CLK_cb.addItem(self.strings['StartFrame']['lane_CLK'][3], 1)
-        self.lane_CLK_cb.setCurrentIndex(1)
+        self.lane_CLK_cb.setCurrentIndex(0)
+        self.lane_CLK_cb.model().item(1).setEnabled(False)
         self.form_layout_lvds_conf.setWidget(0, QFormLayout.ItemRole.LabelRole, self.lane_CLK)
         self.form_layout_lvds_conf.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lane_CLK_cb)
         # Data Rate
         self.data_Rate = QLabel(self.strings['StartFrame']['data_Rate'][0])
         self.data_Rate.setToolTip(self.strings['StartFrame']['data_Rate'][1])
         self.data_Rate_cb = QComboBox()
-        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][2], 0)
-        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][3], 1)
-        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][4], 2)
-        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][5], 3)
-        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][6], 4)
-        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][7], 5)
-        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][8], 6)
+        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][2], [1, 10])
+        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][3], [2, 6])
+        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][4], [3, 2])
+        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][5], [4, 11])
+        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][6], [5, 7])
+        self.data_Rate_cb.addItem(self.strings['StartFrame']['data_Rate'][7], [6, 7])
         self.data_Rate_cb.setCurrentIndex(1)
+        self.data_Rate_cb.model().item(0).setEnabled(False)
+        self.data_Rate_cb.model().item(2).setEnabled(False)
+        self.data_Rate_cb.model().item(4).setEnabled(False)
+        self.data_Rate_cb.model().item(5).setEnabled(False)
         self.form_layout_lvds_conf.setWidget(1, QFormLayout.ItemRole.LabelRole, self.data_Rate)
         self.form_layout_lvds_conf.setWidget(1, QFormLayout.ItemRole.FieldRole, self.data_Rate_cb)
         self.LVDS_config_gb.setLayout(self.form_layout_lvds_conf)
@@ -294,6 +312,7 @@ class StartFrame(QFrame):
         # MSB First
         self.msb_form = QFormLayout()
         self.msb_first = QLabel(self.strings['StartFrame']['lane_param_conf'][2])
+        self.msb_first.setToolTip(self.strings['StartFrame']['lane_param_conf'][3])
         self.msb_first_cb = QCheckBox()
         self.msb_first_cb.setChecked(True)
         self.msb_form.setWidget(0, QFormLayout.ItemRole.LabelRole, self.msb_first)
@@ -301,26 +320,52 @@ class StartFrame(QFrame):
         self.lane_param_h_layout.addLayout(self.msb_form)
         # CRC
         self.crc_form = QFormLayout()
-        self.crc = QLabel(self.strings['StartFrame']['lane_param_conf'][3])
+        self.crc = QLabel(self.strings['StartFrame']['lane_param_conf'][4])
+        self.crc.setToolTip(self.strings['StartFrame']['lane_param_conf'][5])
         self.crc_cb = QCheckBox()
         self.crc_form.setWidget(0, QFormLayout.ItemRole.LabelRole, self.crc)
         self.crc_form.setWidget(0, QFormLayout.ItemRole.FieldRole, self.crc_cb)
         self.lane_param_h_layout.addLayout(self.crc_form)
+        # Packet End Pulse
+        self.packet_end_pulse_form = QFormLayout()
+        self.packet_end_pulse = QLabel(self.strings['StartFrame']['lane_param_conf'][6])
+        self.packet_end_pulse.setToolTip(self.strings['StartFrame']['lane_param_conf'][7])
+        self.packet_end_pulse_cb = QCheckBox()
+        self.packet_end_pulse_form.setWidget(0, QFormLayout.ItemRole.LabelRole, self.packet_end_pulse)
+        self.packet_end_pulse_form.setWidget(0, QFormLayout.ItemRole.FieldRole, self.packet_end_pulse_cb)
+        self.lane_param_h_layout.addLayout(self.packet_end_pulse_form)
         self.form_layout_lvds_lane_conf.setWidget(2, QFormLayout.ItemRole.LabelRole, self.lane_param_conf)
         self.form_layout_lvds_lane_conf.setLayout(2, QFormLayout.ItemRole.FieldRole, self.lane_param_h_layout)
         self.LVDS_lane_config_gb.setLayout(self.form_layout_lvds_lane_conf)
 
+        # Navigation and firmware config layout
+        self.end_layout = QHBoxLayout()
+        self.main_layout.addLayout(self.end_layout)
+        # Firmware label
+        self.firmware_label = QLabel(self.strings['StartFrame']['firmware'][0])
+        self.firmware_label.setToolTip(self.strings['StartFrame']['firmware'][1])
+        self.firmware_label.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Minimum)
+        # Firmware checkbox
+        self.firmware_cb = QCheckBox()
+        self.firmware_cb.setChecked(True)
+        self.firmware_cb.setDisabled(True)
+        self.firmware_cb.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+        self.end_layout.addWidget(self.firmware_label)
+        self.end_layout.addWidget(self.firmware_cb)
+
         # Navigation gp
         self.navigation_gp = QGroupBox(self.strings['StartFrame']['GroupBoxes'][6])
-        self.main_layout.addWidget(self.navigation_gp)
+        self.navigation_gp.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        self.navigation_gp.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        self.end_layout.addWidget(self.navigation_gp)
         self.navigation_layout = QHBoxLayout()
-        # Exit button
-        self.exit_button = QPushButton(self.strings['StartFrame']['navigation'][0])
-        self.navigation_layout.addWidget(self.exit_button)
-        # Config button
-        self.open_nw_config = QPushButton(self.strings['StartFrame']['navigation'][1])
-        self.navigation_layout.addWidget(self.open_nw_config)
         # Next button
-        self.next_button = QPushButton(self.strings['StartFrame']['navigation'][2])
+        self.next_button = QPushButton(self.strings['StartFrame']['navigation'][0])
         self.navigation_layout.addWidget(self.next_button)
         self.navigation_gp.setLayout(self.navigation_layout)
+        # Config button
+        self.open_nw_config_button = QPushButton(self.strings['StartFrame']['navigation'][1])
+        self.navigation_layout.addWidget(self.open_nw_config_button)
+        # Exit button
+        self.exit_button = QPushButton(self.strings['StartFrame']['navigation'][2])
+        self.navigation_layout.addWidget(self.exit_button)
