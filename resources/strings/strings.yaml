@@ -7,9 +7,16 @@ StartFrame:
     - "LVDS clock configuration parameters"
     - "LVDS Lane configuration parameters"
     - "Navigation"
+  crcType:
+    - "crcType"
+  ackTimeout:
+    - "ackTimeout"
   channel_Tx:
     - "channel_Tx"
-    - "TX Channel Bitmap \nSupport: TX0, TX1, TX2, TX0 + TX1, TX0 + TX2, TX1 + TX2"
+    - "TX Channel Bitmap 
+      \n\n3 Tx Simultaneous operation is supported only in AWR1843.
+      \nRest of the other devices only support simultaneous operation of 2 Transmitters.
+      \n\nSupport: TX0, TX1, TX2, TX0 + TX1, TX0 + TX2, TX1 + TX2"
     - "Tx0"
     - "Tx1"
     - "Tx2"
@@ -22,6 +29,10 @@ StartFrame:
     - "Rx2"
     - "Rx3"
     - "channelRx"
+    - "rxChanEn"
+  degree_resolution:
+    - "Angle resolution, deg: "
+    - "14.3239"
   cascading_Mode:
     - "cascading_Mode"
     - "Enable Cascading Mode \nCascading not support on DCA1000EVM"
@@ -29,6 +40,7 @@ StartFrame:
     - "Master"
     - "Slave"
     - "cascade_enable"
+    - "cascading"
   adc_Bits:
     - "ADC Bits"
     - "ADC out bits \n0(12 Bits), 1(14 Bits), 2(16 Bits)"
@@ -36,6 +48,7 @@ StartFrame:
     - "14"
     - "16"
     - "adcBits"
+    - "adcBitsD"
   adc_Format:
     - "ADC Format"
     - "ADC out format \n0(Real), 1(Complex), 2(Complex with Image band), 3(Pseudo Real)"
@@ -44,6 +57,14 @@ StartFrame:
     - "Complex2x"
     - "PseudoReal"
     - "adcFormat"
+    - "adcFmt"
+  iqSwapSel:
+    - "IQ Swap"
+    - "I First"
+    - "Q First"
+    - "iqSwapSel"
+  chInterleave:
+    - "chInterleave"
   lp_Adc_Mode:
     - "LP Mode"
     - "Low Power mode configuration"
@@ -91,18 +112,21 @@ StartFrame:
     - "CQ0 Trans Size"
     - "Number of samples (in 16 bit halfwords) of CQ0 data to be transferred 
     \nValid range [32 halfwords to 128 halfwords]
+    \n Value 0 = Disabled
     \n\nNOTE: Ensure that the number of halfwords specified are a multiple of the number of lanes selected"
     - "cq0TransSize"
   cq1:
     - "CQ1 Trans Size"
     - "Number of samples (in 16 bit halfwords) of CQ1 data to be transferred 
     \nValid range [32 halfwords to 128 halfwords]
+    \n Value 0 = Disabled
     \n\nNOTE: Ensure that the number of halfwords specified are a multiple of the number of lanes selected"
     - "cq1TransSize"
   cq2:
     - "CQ2 Trans Size"
     - "Number of samples (in 16 bit halfwords) of CQ2 data to be transferred 
     \nValid range [32 halfwords to 128 halfwords]
+    \n Value 0 = Disabled
     \n\nNOTE: Ensure that the number of halfwords specified are a multiple of the number of lanes selected"
     - "cq2TransSize"
   lane_CLK:
@@ -114,7 +138,6 @@ StartFrame:
   data_Rate:
     - "Data Rate"
     - "Data rate selection"
-    - "900 Mbps"
     - "600 Mbps"
     - "450 Mbps"
     - "400 Mbps"
@@ -122,6 +145,7 @@ StartFrame:
     - "225 Mbps"
     - "150 Mbps"
     - "dataRate"
+    - "hsiClk"
   lane_Format:
     - "Lane Format"
     - "Lane format \n0 - Format map 0 (Rx0,Rx1,...), 1 - Format map 1 (Rx3,Rx2,...)"
@@ -140,18 +164,31 @@ StartFrame:
     - "Lane Param Config"
     - "Lane Parameter configurations"
     - "MSB First"
+    - "Most Significant Bit, first going MSB"
     - "CRC"
+    - "Cyclic Redundancy Check (CRC) is a technique used to detect errors in digital data. 
+      \nAs a type of checksum, the CRC produces a fixed-length data set based on the build of a file or larger data set"
+    - "Packet End Pulse"
+    - "Pulse feedback when packet end"
     - "laneParamCfg"
+  firmware:
+    - "Download Firmware"
+    - "Download FIrmware/patch (Optional). Device firmware is ROMed and also can be stored in External Flash. 
+      \nThis step is necessary if firmware needs to be patched and patch is not stored in serial Flash"
   navigation:
-    - "Exit"
-    - "Network configuration"
     - "Next"
+    - "N/W config"
+    - "Exit"
 
 SignalConfigurationFrame:
   GroupBoxes:
     - "Profile Configuration"
     - "Chirp Configuration"
     - "Frame Configuration"
+    - "Checking the connection"
+    - "FPGA path configuration"
+    - "Result data path"
+    - "Navigation"
   profile:
     - "Profile ID"
     - "Profile index
@@ -263,11 +300,34 @@ SignalConfigurationFrame:
     \n1 LSB = 1 dB
     \nValid values: For xWR1xxx : all even values from 24 to 52"
     - "rxGain"
+  bandwidth:
+    - "Bandwidth, MHz"
+    - "767.5392"
+  range_resolution:
+    - "Range resolution, meters: "
+    - "0.195295"
+    - "Unavailable params"
+  profile_Set:
+    - "Configurate profile"
+    - "Set"
+  chirp_Set:
+    - "Configurate chirp"
+    - "Set"
+  step_Set:
+    - "Step"
+    - "Assign the step with which the loop will be filled
+      \nIf step value = 0 -> assign w/o steps
+      \nExample: shad = 2, start idx = 0 -> idx 0, idx2, idx4 . . ."
+    - "Last idx"
   profile_Id:
     - "Profile id"
     - "Associated profile id
     \nValid: 0-3"
     - "profileIdCPCFG"
+    - "Profile 0"
+    - "Profile 1"
+    - "Profile 2"
+    - "Profile 3"
   chirp_Start_Idx:
     - "Chirp Start id"
     - "Chirp start index (0-511)
@@ -347,7 +407,9 @@ SignalConfigurationFrame:
   num_Adc_Samples_frame:
     - "Num ADC Samples"
     - "Number of ADC samples to capture This parameter is required only for AWR1243 and
-    \nconfigures the size of ADC samples per chirp to be sent on LVDS/CSI2 interface."
+    \nconfigures the size of ADC samples per chirp to be sent on LVDS/CSI2 interface.
+    \n\nIt should be configured as: For real/pseudo real ADC data: num_ADC_samples = num_ADC_samples from profile settings
+    \nFor complex1x/complex2x ADC data: numADCSamples = (num_ADC_samples from profile settings) * 2"
     - "numAdcSamples"
   trigger_Select:
     - "Trigger Select"
@@ -358,3 +420,70 @@ SignalConfigurationFrame:
     - "Software Trigger"
     - "Hardware Trigger"
     - "triggerSelect"
+  navigation:
+    - "Check the connection"
+    - "Status unknown"
+    - "Device is connected"
+    - "Could not find device"
+    - "FPGA is not configured"
+    - "FPGA successfully configured"
+    - "FPGA is not configured"
+    - "Config FPGA path"
+    - "Browse"
+    - "Next"
+    - "Back"
+    - "Exit"
+WaitFrame:
+  label:
+    - "Device is being configured"
+    - "Data successfully received and processed"
+  GroupBoxes:
+    - "Navigation"
+  navigation:
+    - "Exit"
+    - "Back"
+    - "Write .CSV file"
+    - "Next"
+    - "Open log file"
+ResultFrame:
+  GroupBoxes:
+    - "Plot result"
+    - "Plot configuration"
+    - "Navigation"
+    - "CFAR config"
+    - "Navigation"
+  PlotType:
+    - "Plot type"
+    - "Range FFT"
+    - "1D FFT real"
+    - "1D FFT image"
+    - "Doppler FFT"
+    - "Time Domain"
+    - "Object detection / CA-CFAR"
+    - "Doppler FFT 3D"
+    - "Angle FFT"
+    - "Detected object"
+  FrameNum:
+    - "Frame Num"
+  LoopNum:
+    - "Loop Num"
+  ChirpNum:
+    - "Chirp Num"
+  LaneNum:
+    - "Lane Num"
+    - "Lane 1"
+    - "Lane 2"
+    - "Lane 3"
+    - "Lane 4"
+  PlotBuild:
+    - "Plot Result"
+    - "Plot"
+  CFAR:
+    - "Guard cell"
+    - "Training cell"
+    - "Probability of false alarm "
+  Navigation:
+    - "Re-configurate"
+    - "Exit"
+Controller:
+  - "Exit with error code: "
