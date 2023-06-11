@@ -3,11 +3,13 @@ from StringBuilder.string_builder import StringBuilder
 
 class ConvertingValues:
 
+    # def data_rate_to_hsi_clk(self, data_rate):
+
     # Для AWR1243 допустимый диапазон = 76-81GHz
     # В конфигурационный файл передается кол-во делений
     # 1 LSB = 3.6e9 / 2^26 Hz = 53.644 Hz
     # Valid range: 0x5471C71B to 0x5A000000
-    def start_freq_translation(self, freq):
+    def start_freq_translation(self, freq: float):
         lsb = 53.644
 
         max_value = 1_509_949_440
@@ -21,7 +23,7 @@ class ConvertingValues:
     # В конфигурационный файл передается кол-во делений
     # 1 LSB = (3.6e6 * 900) / 2^26 = 48.279 kHz/uS
     # Valid range: -2072 to 2072 (Max 100MHz/uS)
-    def freq_slope_translation(self, freq_slope):
+    def freq_slope_translation(self, freq_slope: float):
         lsb = 48.279
 
         freq_khz = self.convert_mhz_khz(freq_slope)
@@ -31,19 +33,19 @@ class ConvertingValues:
     # Конвертация idle time (мкс) в нс
     # 1 LSB = 10 ns
     @staticmethod
-    def idle_time_converter(idle_time):
+    def idle_time_converter(idle_time: float):
         return int(idle_time * 100)
 
     # Конвертация adc_start_time (мкс) в нс
     # 1 LSB = 10 ns
     @staticmethod
-    def adc_start_time_converter(adc_st):
+    def adc_start_time_converter(adc_st: float):
         return int(adc_st * 100)
 
     # Конвертация ramp end time (мкс) в нс
     # 1 LSB = 10 ns
     @staticmethod
-    def ramp_end_time_converter(ramp_et):
+    def ramp_end_time_converter(ramp_et: float):
         return int(ramp_et * 100)
 
     # Объединение значений tx0-tx2 out power backoff code
@@ -52,7 +54,7 @@ class ConvertingValues:
     # b23:16 TX2 output power back off
     # b31:24 Reserved
     @staticmethod
-    def tx_out_power_backoff_code_concatenate(tx0, tx1, tx2):
+    def tx_out_power_backoff_code_concatenate(tx0: int, tx1: int, tx2: int):
         sb = StringBuilder()
 
         sb.append('00000000')
@@ -63,7 +65,7 @@ class ConvertingValues:
 
         sb.append('{0:08b}'.format(tx0))
 
-        return sb.to_string()
+        return int(sb.to_string(), 2)
 
     # Объединение значений tx0-tx2 phase shift
     # 1 LSB = 360/2^6 = 5.625 degrees
@@ -75,7 +77,7 @@ class ConvertingValues:
     # b23:18 TX2 phase shift value
     # b31:24 Reserved
     @staticmethod
-    def tx_phase_shift_concatenate(tx0, tx1, tx2):
+    def tx_phase_shift_concatenate(tx0: int, tx1: int, tx2: int):
         sb = StringBuilder()
 
         lsb = 5.625
@@ -94,18 +96,18 @@ class ConvertingValues:
 
         sb.append('00')
 
-        return sb.to_string()
+        return int(sb.to_string(), 2)
 
     # Конвертация tx start time (мкс) в нс
     # 1 LSB = 10 ns
     @staticmethod
-    def tx_start_time_converter(tx_start_time):
+    def tx_start_time_converter(tx_start_time: float):
         return int(tx_start_time * 100)
 
     # Максимальное значение = 449.9 MHz
     # 1 LSB = 3.6e9/2^26 = 53.644 Hz
     # valid range = 0-8388607
-    def start_freq_var_translation(self, freq):
+    def start_freq_var_translation(self, freq: float):
         lsb = 53.644
 
         max_value = 8_388_607
@@ -118,7 +120,7 @@ class ConvertingValues:
     # Максимальный уклон для сенсора AWR1243 = 3041,577 KHz/uS
     # 1 LSB = (3.6e6 * 900) / 2^26 = 48.279 kHz/uS
     # Valid range: 0 to 63
-    def freq_slope_var_translation(self, freq_slope):
+    def freq_slope_var_translation(self, freq_slope: float):
         lsb = 48.279
 
         freq_khz = self.convert_mhz_khz(freq_slope)
@@ -128,7 +130,7 @@ class ConvertingValues:
     # конвертация периода из ms в us
     # 1 LSB = 5 ns
     # Valid range : 300 us to 1.342 s
-    def periodicity_translation(self, period):
+    def periodicity_translation(self, period: float):
         lsb = 5
 
         period_us = self.convert_ms_ns(period)
@@ -138,34 +140,50 @@ class ConvertingValues:
     # конвертация задержки из mсs в us
     # 1 LSB = 5 ns
     # Typical range is 0 to 100 micro seconds
-    def delay_translation(self, delay):
+    def delay_translation(self, delay: float):
         lsb = 5
 
         delay_us = self.convert_mcs_ns(delay)
 
         return round(delay_us / lsb)
 
+    # Position code convert
+    @staticmethod
+    def position_code_convert(v1: bool, v2: bool, v3: bool, v4: bool):
+        res = 0
+
+        if v1 is True:
+            res += 1
+        if v2 is True:
+            res += 2
+        if v3 is True:
+            res += 4
+        if v4 is True:
+            res += 8
+
+        return res
+
     # ms to us converter
     @staticmethod
-    def convert_ms_ns(period):
+    def convert_ms_ns(period: float):
         return period * 10**6
 
     # mcs to us converter
     @staticmethod
-    def convert_mcs_ns(period):
+    def convert_mcs_ns(period: float):
         return period * 10**3
 
     # GHz to Hz converter
     @staticmethod
-    def convert_ghz_hz(freq):
+    def convert_ghz_hz(freq: float):
         return freq * 10**9
 
     # MHz to kHz converter
     @staticmethod
-    def convert_mhz_khz(freq):
+    def convert_mhz_khz(freq: float):
         return freq * 10**3
 
     # GHz to Hz converter
     @staticmethod
-    def convert_mhz_hz(freq):
+    def convert_mhz_hz(freq: float):
         return freq * 10**6
