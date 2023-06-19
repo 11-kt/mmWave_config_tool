@@ -70,6 +70,88 @@ class MainWindowController:
         with importlib.resources.path("resources.mmwave_link", "mmwavelink.exe") as path:
             self.mmwave_link_exe = path
 
+        # Signals
+        self.start_frame_signals()
+        self.signal_config_frame_signals()
+        self.wait_frame_signals()
+        self.result_frame_signals()
+
+    def start_frame_signals(self):
+        self.window.start_frame.data_Path_cb.currentIndexChanged.connect(self.data_path_configuration_slot)
+
+        self.window.start_frame.next_button.clicked.connect(self.signal_conf_stage)
+
+        self.window.start_frame.open_nw_config_button.clicked.connect(self.network_settings)
+
+        self.window.start_frame.exit_button.clicked.connect(self.exit)
+
+        self.window.start_frame.Tx0_cb.stateChanged.connect(self.tx_controller_slot)
+        self.window.start_frame.Tx0_cb.stateChanged.connect(self.angle_resolution_slot)
+        self.window.start_frame.Tx1_cb.stateChanged.connect(self.tx_controller_slot)
+        self.window.start_frame.Tx1_cb.stateChanged.connect(self.angle_resolution_slot)
+        self.window.start_frame.Tx2_cb.stateChanged.connect(self.tx_controller_slot)
+        self.window.start_frame.Tx2_cb.stateChanged.connect(self.angle_resolution_slot)
+
+        self.window.start_frame.adc_Format_cb.currentIndexChanged.connect(self.num_adc_sample_range_slot)
+
+        self.window.start_frame.Rx0_cb.stateChanged.connect(self.num_adc_sample_range_slot)
+        self.window.start_frame.Rx0_cb.stateChanged.connect(self.angle_resolution_slot)
+        self.window.start_frame.Rx1_cb.stateChanged.connect(self.num_adc_sample_range_slot)
+        self.window.start_frame.Rx1_cb.stateChanged.connect(self.angle_resolution_slot)
+        self.window.start_frame.Rx2_cb.stateChanged.connect(self.num_adc_sample_range_slot)
+        self.window.start_frame.Rx2_cb.stateChanged.connect(self.angle_resolution_slot)
+        self.window.start_frame.Rx3_cb.stateChanged.connect(self.num_adc_sample_range_slot)
+        self.window.start_frame.Rx3_cb.stateChanged.connect(self.angle_resolution_slot)
+
+        self.window.start_frame.adc_Format_cb.currentIndexChanged.connect(self.iq_swap_slot)
+
+    def signal_config_frame_signals(self):
+        self.window.signal_conf_frame.next_button.clicked.connect(self.start_device_stage)
+
+        self.window.signal_conf_frame.set_profile_button.clicked.connect(self.configurate_profile_slot)
+
+        self.window.signal_conf_frame.set_chirp_button.clicked.connect(self.configurate_chirp_slot)
+
+        self.window.signal_conf_frame.chirp_Start_Idx_sb.valueChanged.connect(self.step_chirp_slot)
+        self.window.signal_conf_frame.chirp_End_Idx_sb.valueChanged.connect(self.step_chirp_slot)
+
+        self.window.signal_conf_frame.back_button.clicked.connect(self.back_to_start_slot)
+
+        self.window.signal_conf_frame.exit_button.clicked.connect(self.exit)
+
+        self.window.signal_conf_frame.num_Adc_Samples_profile_sb.valueChanged.connect(self.num_adc_sample_rate_slot)
+        self.window.start_frame.adc_Format_cb.currentIndexChanged.connect(self.num_adc_sample_rate_slot)
+
+        self.window.signal_conf_frame.connection_check_button.clicked.connect(self.connection_check_button)
+
+        self.window.signal_conf_frame.config_fpga_path_button.clicked.connect(self.fpga_path_configuration_button)
+
+        self.window.signal_conf_frame.freq_slope_sb.valueChanged.connect(self.bandwidth_change_slot)
+        self.window.signal_conf_frame.dig_Out_Sample_Rate_sb.valueChanged.connect(self.bandwidth_change_slot)
+        self.window.signal_conf_frame.num_Adc_Samples_profile_sb.valueChanged.connect(self.bandwidth_change_slot)
+
+    def wait_frame_signals(self):
+        self.window.wait_frame.next_button.clicked.connect(self.result_plot_stage)
+
+        self.window.wait_frame.csv_create_button.clicked.connect(self.write_csv_file)
+
+        self.window.wait_frame.back_button.clicked.connect(self.back_to_signal_conf_slot)
+
+        self.window.wait_frame.exit_button.clicked.connect(self.exit)
+
+        self.window.wait_frame.open_log_button.clicked.connect(self.open_log_file_in_notepad_slot)
+
+        self.window.signal_conf_frame.result_path_browser.textChanged.connect(self.file_path_edit_signal)
+        self.window.signal_conf_frame.browse_button.clicked.connect(self.file_path_browse_slot)
+
+    def result_frame_signals(self):
+        self.window.result_frame.plot_button.clicked.connect(self.plot_result)
+        self.window.result_frame.plot_type_cb.currentIndexChanged.connect(self.plot_type_pick_slot)
+
+        self.window.result_frame.exit_button.clicked.connect(self.exit)
+
+        self.window.result_frame.re_config_button.clicked.connect(self.re_configurate_slot)
+
     def data_path_configuration_slot(self):
         if self.window.start_frame.data_Path_cb.currentData() == 0:
             self.window.start_frame.lane_CLK_cb.model().item(1).setEnabled(True)
