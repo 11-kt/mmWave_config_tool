@@ -487,3 +487,35 @@ ResultFrame:
     - "Exit"
 Controller:
   - "Exit with error code: "
+PlotLegend:
+  RangeFFT:
+    - "Range, m"
+    - "Relative power, dB"
+    - "Range FFT"
+    - "1D FFT per chirp Real"
+    - "1D FFT per chirp Image"
+  DopplerFFT:
+    - "Velocity, m/s"
+    - "Range, m"
+    - "Doppler FFT"
+    - "Relative power, dB"
+    - "3d - Doppler FFT"
+  TimeDomain:
+    - "Time, mcs"
+    - "ADC value"
+    - "Time domain"
+    - "real"
+    - "image"
+  CFAR:
+    - "Range, m"
+    - "Relative power, dB"
+    - "Object detection / CA-CFAR"
+    - "threshold"
+    - "Range FFT"
+  AngleFFT:
+    - "Angle, degree"
+    - "Range, m"
+    - "Angle FFT"
+  DetectedObj:
+    - "Range, m"
+    - "Detected objects"
