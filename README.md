@@ -55,7 +55,7 @@
       * Настройка параметров сетевого адаптера (открытие окна панели управления Windows)
       * Следующий этап конфигурации
 
-![first step config](./assets/first step config.png)
+![first step config](./assets/first_step_config.png)
 
 * Конфигурация параметров сигнала
   * Конфигурация профиля 
@@ -109,7 +109,7 @@
     * Переход к предыдущему этапу 
     * Переход к этапу конфигурации и запуска устройства
   
-![second step config](./assets/second step config.png)
+![second step config](./assets/second_step_config.png)
 
 ## Взаимодействие с устройством:
 * За взаимодействие с устройством отвечают два исполняемых файла:
@@ -123,7 +123,7 @@
 
 * Процесс конфигурации и запуска устройства:
 
-![config and start device](./assets/config and start device.png)
+![config and start device](./assets/config_and_start_device.png)
 
 ## Обработка полученных данных
 * Доступны следующие алгоритмы обработки данных:
