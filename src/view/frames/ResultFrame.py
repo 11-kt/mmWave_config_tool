@@ -139,7 +139,7 @@ class ResultFrame(QFrame):
         self.guard_cell_layout.addWidget(self.guard_cell_label)
         # Guard Cell sb
         self.guard_cell_sb = QSpinBox()
-        self.guard_cell_sb.setRange(1, 20)
+        self.guard_cell_sb.setRange(1, 100)
         self.guard_cell_sb.setValue(5)
         self.guard_cell_layout.addWidget(self.guard_cell_sb)
         self.cfar_layout.addLayout(self.guard_cell_layout, 0, 0)
@@ -151,7 +151,7 @@ class ResultFrame(QFrame):
         self.training_cell_layout.addWidget(self.training_cell_label)
         # Guard Cell sb
         self.training_cell_sb = QSpinBox()
-        self.training_cell_sb.setRange(1, 20)
+        self.training_cell_sb.setRange(1, 100)
         self.training_cell_sb.setValue(10)
         self.training_cell_layout.addWidget(self.training_cell_sb)
         self.cfar_layout.addLayout(self.training_cell_layout, 1, 0)
