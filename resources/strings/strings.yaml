@@ -1,0 +1,521 @@
+StartFrame:
+  GroupBoxes:
+    - "Channel configuration parameters"
+    - "ADC out configuration parameters"
+    - "Low Power configuration mode"
+    - "Data Path configuration parameters"
+    - "LVDS clock configuration parameters"
+    - "LVDS Lane configuration parameters"
+    - "Navigation"
+  crcType:
+    - "crcType"
+  ackTimeout:
+    - "ackTimeout"
+  channel_Tx:
+    - "channel_Tx"
+    - "TX Channel Bitmap 
+      \n\n3 Tx Simultaneous operation is supported only in AWR1843.
+      \nRest of the other devices only support simultaneous operation of 2 Transmitters.
+      \n\nSupport: TX0, TX1, TX2, TX0 + TX1, TX0 + TX2, TX1 + TX2"
+    - "Tx0"
+    - "Tx1"
+    - "Tx2"
+    - "channelTx"
+  channel_Rx:
+    - "channel_Rx"
+    - "RX Channel Bitmap"
+    - "Rx0"
+    - "Rx1"
+    - "Rx2"
+    - "Rx3"
+    - "channelRx"
+    - "rxChanEn"
+  degree_resolution:
+    - "Angle resolution, deg: "
+    - "14.3239"
+  cascading_Mode:
+    - "cascading_Mode"
+    - "Enable Cascading Mode \nCascading not support on DCA1000EVM"
+    - "Single Chip"
+    - "Master"
+    - "Slave"
+    - "cascade_enable"
+    - "cascading"
+  adc_Bits:
+    - "ADC Bits"
+    - "ADC out bits \n0(12 Bits), 1(14 Bits), 2(16 Bits)"
+    - "12"
+    - "14"
+    - "16"
+    - "adcBits"
+    - "adcBitsD"
+  adc_Format:
+    - "ADC Format"
+    - "ADC out format \n0(Real), 1(Complex), 2(Complex with Image band), 3(Pseudo Real)"
+    - "Real"
+    - "Complex1x"
+    - "Complex2x"
+    - "PseudoReal"
+    - "adcFormat"
+    - "adcFmt"
+  iqSwapSel:
+    - "IQ Swap"
+    - "I First"
+    - "Q First"
+    - "iqSwapSel"
+  chInterleave:
+    - "chInterleave"
+  lp_Adc_Mode:
+    - "LP Mode"
+    - "Low Power mode configuration"
+    - "Regular ADC"
+    - "Low Power ADC"
+    - "lpAdcMode"
+  data_Path:
+    - "Data Path"
+    - "Data path config"
+    - "CSI2"
+    - "LVDS"
+    - "SPI"
+    - "intfSel"
+  Pkt0:
+    - "Transfer Format Packet 0"
+    - "Data out Format \nPacket0 \nPacket 0 virtual channel number (valid only for CSI2)
+    \n00 Virtual channel number 0 (Default)
+    \n01 Virtual channel number 1
+    \n10 Virtual channel number 2
+    \n11 Virtual channel number 3"
+    - "ADC_ONLY"
+    - "CP_ADC"
+    - "ADC_CP"
+    - "CP_ADC_CQ"
+    - "transferFmtPkt0"
+  Pkt1:
+    - "Transfer Format Packet 1"
+    - "Data out Format \nPacket 1 \nPacket 1 virtual channel number (valid only for CSI2)
+    \n00 Virtual channel number 0 (Default)
+    \n01 Virtual channel number 1
+    \n10 Virtual channel number 2
+    \n11 Virtual channel number 3"
+    - "Suppress Packet"
+    - "CP_CQ"
+    - "CQ_CP"
+    - "transferFmtPkt1"
+  cq_conf:
+    - "CQ Configuration"
+    - "This field specifies the data size of CQ samples on the lanes"
+    - "12"
+    - "14"
+    - "16"
+    - "cqConfig"
+  cq0:
+    - "CQ0 Trans Size"
+    - "Number of samples (in 16 bit halfwords) of CQ0 data to be transferred 
+    \nValid range [32 halfwords to 128 halfwords]
+    \n Value 0 = Disabled
+    \n\nNOTE: Ensure that the number of halfwords specified are a multiple of the number of lanes selected"
+    - "cq0TransSize"
+  cq1:
+    - "CQ1 Trans Size"
+    - "Number of samples (in 16 bit halfwords) of CQ1 data to be transferred 
+    \nValid range [32 halfwords to 128 halfwords]
+    \n Value 0 = Disabled
+    \n\nNOTE: Ensure that the number of halfwords specified are a multiple of the number of lanes selected"
+    - "cq1TransSize"
+  cq2:
+    - "CQ2 Trans Size"
+    - "Number of samples (in 16 bit halfwords) of CQ2 data to be transferred 
+    \nValid range [32 halfwords to 128 halfwords]
+    \n Value 0 = Disabled
+    \n\nNOTE: Ensure that the number of halfwords specified are a multiple of the number of lanes selected"
+    - "cq2TransSize"
+  lane_CLK:
+    - "Lane Clock"
+    - "Clock Configuration \n0 - SDR Clock, 1 - DDR Clock (Only valid value for CSI2)"
+    - "SDR Clock"
+    - "DDR Clock"
+    - "laneClk"
+  data_Rate:
+    - "Data Rate"
+    - "Data rate selection"
+    - "600 Mbps"
+    - "450 Mbps"
+    - "400 Mbps"
+    - "300 Mbps"
+    - "225 Mbps"
+    - "150 Mbps"
+    - "dataRate"
+    - "hsiClk"
+  lane_Format:
+    - "Lane Format"
+    - "Lane format \n0 - Format map 0 (Rx0,Rx1,...), 1 - Format map 1 (Rx3,Rx2,...)"
+    - "Format 0"
+    - "Format 1"
+    - "laneFmtMap"
+  lane_conf:
+    - "Lane Config"
+    - "Lane Enable Bitmap"
+    - "Lane 1"
+    - "Lane 2"
+    - "Lane 3"
+    - "Lane 4"
+    - "laneEn"
+  lane_param_conf:
+    - "Lane Param Config"
+    - "Lane Parameter configurations"
+    - "MSB First"
+    - "Most Significant Bit, first going MSB"
+    - "CRC"
+    - "Cyclic Redundancy Check (CRC) is a technique used to detect errors in digital data. 
+      \nAs a type of checksum, the CRC produces a fixed-length data set based on the build of a file or larger data set"
+    - "Packet End Pulse"
+    - "Pulse feedback when packet end"
+    - "laneParamCfg"
+  firmware:
+    - "Download Firmware"
+    - "Download FIrmware/patch (Optional). Device firmware is ROMed and also can be stored in External Flash. 
+      \nThis step is necessary if firmware needs to be patched and patch is not stored in serial Flash"
+  navigation:
+    - "Next"
+    - "N/W config"
+    - "Exit"
+
+SignalConfigurationFrame:
+  GroupBoxes:
+    - "Profile Configuration"
+    - "Chirp Configuration"
+    - "Frame Configuration"
+    - "Checking the connection"
+    - "FPGA path configuration"
+    - "Result data path"
+    - "Navigation"
+  profile:
+    - "Profile ID"
+    - "Profile index
+    \nValid: 0-3"
+    - "profileId"
+  start_freq:
+    - "Start Freq, GHz"
+    - "Start frequency for each profile
+    \nFor 77GHz devices (76 GHz - 81 GHz):
+    \n1 LSB = 3.6e9 / 2^26 Hz = 53.644 Hz
+    \nValid range: 0x5471C71B to 0x5A000000"
+    - "startFreqConst"
+  freq_slope:
+    - "Freq slope, MHz / us"
+    - "Ramp slope frequency,
+    \nFor 77GHz devices (76GHz to 81GHz):
+    \n1 LSB = (3.6e6 * 900) / 2^26 = 48.279 kHz/uS
+    \nValid range: -2072 to 2072 (Max 100MHz/uS)"
+    - "freqSlopeConst"
+  idle_time:
+    - "Idle Time, us"
+    - "Idle time
+    \n1 LSB = 10 ns
+    \nValid range: 0 to 524287"
+    - "idleTimeConst"
+  adc_st:
+    - "ADC Start Time, us"
+    - "Time of starting of ADC capture relative to the knee of the ramp
+    \n1 LSB = 10 ns
+    \nValid range: 0 to 4095"
+    - "adcStartTimeConst"
+  ramp_et:
+    - "Ramp End Time, us"
+    - "End of ramp time relative to the knee of the ramp
+    \n1 LSB = 10 ns
+    \nValid range: 0 to 500000
+    \nEnsure that the total frequency sweep is either within these ranges:
+    \n77G : 76 - 78 GHz or 77 - 81 GHz"
+    - "rampEndTime"
+  tx_Out_Power_Backoff_Code:
+    - "TX0 Out Power Backoff Code, dB"
+    - "TX output power back off
+    \n1LSB = 1dB Valid Value: 0, 3, 6, 9
+    \nIf TX power boot time calibration is disabled then only 0dB back off is supported. 
+    \n0dB back-off corresponds to typically 12dBm power level in 1st gen xWR1xxx devices
+    \n\nNOTE: For best inter-TX channel matching performance, same chirp profile and
+    \nsame TX backoff value should be used for all the TXs that are used in beam-forming"
+    - "TX1 Out Power Backoff Code, dB"
+    - "TX2 Out Power Backoff Code, dB"
+    - "0"
+    - "3"
+    - "6"
+    - "9"
+    - "txOutPowerBackoffCode"
+  tx_Phase_Shifter:
+    - "TX0 Phase Shifter, deg"
+    - "phase shift for TX0/1/2
+    \n1 LSB = 360/2^6 = 5.625 degrees
+    \nValid range: 0 to 360
+    \nThis field defines the additional phase shift to be introduced on each transmitter output
+    \n\nNOTE: Chirps corresponding to different profiles are not guaranteed to have phase coherency"
+    - "TX1 Phase Shifter, deg"
+    - "TX2 Phase Shifter, deg"
+    - "txPhaseShifter"
+  tx_Start_Time:
+    - "TX Start Time, us"
+    - "Time of start of transmitter relative to the knee of the ramp
+    \n1 LSB = 10ns
+    \nValid range: -4096 to 4095"
+    - "txStartTime"
+  num_Adc_Samples_profile:
+    - "Num ADC Samples"
+    - "Number of ADC samples to capture in a chirp for each RX
+    \nValid range: 2 to MAX_NUM_SAMPLES
+    \n\nWhere MAX_NUM_SAMPLES is such that all the enabled RX channels' data fits into 16 kB memory memory in AWR1243
+    \nwith each sample consuming 2 bytes for real ADC output case and 4 bytes for complex 1x and complex 2x ADC 
+    \noutput cases number of RX chains ADC format Maximum Number of samples
+    \n\n4 complex 1024
+    \n4 Real 2048
+    \n2 Complex 2048
+    \n2 Real 4096"
+    - "numAdcSamples"
+  dig_Out_Sample_Rate:
+    - "Sample Rate, ksps"
+    - "ADC Sampling rate for each profile is encoded in
+    \n2 bytes (16 bit unsigned number)
+    \n1 LSB = 1 ksps
+    \nValid range: xWR1xxx devices: 2000 to 37500 (Max 15MHz IF bandwidth)"
+    - "digOutSampleRate"
+  hpf_Corner_Freq1:
+    - "HPF 1 Corner Freq"
+    - "Code for HPF1 corner frequency"
+    - "175K"
+    - "235K"
+    - "350K"
+    - "700K"
+    - "hpfCornerFreq1"
+  hpf_Corner_Freq2:
+    - "HPF 2 Corner Freq"
+    - "Code for HPF2 corner frequency"
+    - "350K"
+    - "700K"
+    - "1.4M"
+    - "2.8M"
+    - "hpfCornerFreq2"
+  rx_Gain:
+    - "RX Gain, dB"
+    - "Code for Rx VGA gain
+    \n1 LSB = 1 dB
+    \nValid values: For xWR1xxx : all even values from 24 to 52"
+    - "rxGain"
+  bandwidth:
+    - "Bandwidth, MHz"
+    - "767.5392"
+  range_resolution:
+    - "Range resolution, meters: "
+    - "0.195295"
+    - "Unavailable params"
+  profile_Set:
+    - "Configurate profile"
+    - "Set"
+  chirp_Set:
+    - "Configurate chirp"
+    - "Set"
+  step_Set:
+    - "Step"
+    - "Assign the step with which the loop will be filled
+      \nIf step value = 0 -> assign w/o steps
+      \nExample: shad = 2, start idx = 0 -> idx 0, idx2, idx4 . . ."
+    - "Last idx"
+  profile_Id:
+    - "Profile id"
+    - "Associated profile id
+    \nValid: 0-3"
+    - "profileIdCPCFG"
+    - "Profile 0"
+    - "Profile 1"
+    - "Profile 2"
+    - "Profile 3"
+  chirp_Start_Idx:
+    - "Chirp Start id"
+    - "Chirp start index (0-511)
+    \nOne can define upto 512 unique chirps"
+    - "chirpStartIdx"
+  chirp_End_Idx:
+    - "Chirp End id"
+    - "Chirp end index (0-511)"
+    - "chirpEndIdx"
+  start_Freq_Var:
+    - "Start Freq Var, MHz"
+    - "Ramp start frequency
+  \nFor 77GHz devices(76GHz to 81GHz):
+  \n1 LSB = 3.6e9/2^26 = 53.644 Hz
+  \nvalid range = 0-8388607"
+    - "startFreqVar"
+  freq_Slope_Var:
+    - "Freq Slope Var, MHz / us"
+    - "Ramp slope
+  \nFor 77GHz devices(76GHz to 81GHz):
+  \n1 LSB = 3.6e6 * 900/2^26 = 48.279 KHz/us
+  \nvalid range = 0-63"
+    - "freqSlopeVar"
+  idle_Time_Var:
+    - "Idle Time Var, us"
+    - "Idle time for each chirp
+    \n1 LSB = 10ns
+    \nvalid range = 0-4096"
+    - "idleTimeVar"
+  adc_Start_Time_Var:
+    - "ADC Start Time Var, us"
+    - "Adc start time for each chirp
+    \n1 LSB = 10ns
+    \nvalid range = 0-4096"
+    - "adcStartTimeVar"
+  tx_Enable:
+    - "TX Enable"
+    - "Tx enable selection bit mask
+    \n\nNOTE: Maximum of only 2 TX can be turned in a chirp"
+    - "Tx0"
+    - "Tx1"
+    - "Tx2"
+    - "txEnable"
+  chirp_Start_Id:
+    - "Chirp Start id"
+    - "Start Index of Chirp Valid range = 0-511"
+    - "chirpStartIdxFCF"
+  chirp_End_Id:
+    - "Chirp End id"
+    - "End Index of Chirp Valid range = chirpStartIdx-511"
+    - "chirpEndIdxFCF"
+  frame_Count:
+    - "Frame Count"
+    - "Number of frame to transmit
+    \nValid Range 0 to 65535 (0 for infinite frames)"
+    - "frameCount"
+  loop_Count:
+    - "Loop Count"
+    - "Number of times to repeat from chirpStartIdx to chirpStartIdx in each frame
+    \nvalid range = 1 to 255"
+    - "loopCount"
+  periodicity:
+    - "Periodicity, ms"
+    - "Frame repitition period
+    \nPERIOD >= Sum total time of all chirps + InterFrameBlankTime, 
+    \nwhere, Sum total time of all chirps = Num Loops * Num chirps
+    \n1 LSB = 5 ns
+    \nValid range : 300 us to 1.342 s"
+    - "periodicity"
+  trigger_Delay:
+    - "Trigger Delay, mcs"
+    - "Optional time delay from sync_in trigger to the occurance of frame chirps
+    \nApplicable only in SINGLECHIP sensor applications
+    \n1 lsb = 5 ns
+    \nTypical range is 0 to 100 micro seconds"
+    - "triggerDelay"
+  num_Adc_Samples_frame:
+    - "Num ADC Samples"
+    - "Number of ADC samples to capture This parameter is required only for AWR1243 and
+    \nconfigures the size of ADC samples per chirp to be sent on LVDS/CSI2 interface.
+    \n\nIt should be configured as: For real/pseudo real ADC data: num_ADC_samples = num_ADC_samples from profile settings
+    \nFor complex1x/complex2x ADC data: numADCSamples = (num_ADC_samples from profile settings) * 2"
+    - "numAdcSamples"
+  trigger_Select:
+    - "Trigger Select"
+    - "Selects the mode for triggering start of transmission of frame
+    \n1 - SWTRIGGER (Software API based triggering)
+    \nThere could be several tens of micro seconds uncertainty in triggering
+    \n\nNOTE: only for single chip"
+    - "Software Trigger"
+    - "Hardware Trigger"
+    - "triggerSelect"
+  navigation:
+    - "Check the connection"
+    - "Status unknown"
+    - "Device is connected"
+    - "Could not find device"
+    - "FPGA is not configured"
+    - "FPGA successfully configured"
+    - "FPGA is not configured"
+    - "Config FPGA path"
+    - "Browse"
+    - "Next"
+    - "Back"
+    - "Exit"
+WaitFrame:
+  label:
+    - "Device is being configured"
+    - "Data successfully received and processed"
+  GroupBoxes:
+    - "Navigation"
+  navigation:
+    - "Exit"
+    - "Back"
+    - "Write .CSV file"
+    - "Next"
+    - "Open log file"
+ResultFrame:
+  GroupBoxes:
+    - "Plot result"
+    - "Plot configuration"
+    - "Navigation"
+    - "CFAR config"
+    - "Navigation"
+  PlotType:
+    - "Plot type"
+    - "Range FFT"
+    - "1D FFT real"
+    - "1D FFT image"
+    - "Doppler FFT"
+    - "Time Domain"
+    - "Object detection / CA-CFAR"
+    - "Doppler FFT 3D"
+    - "Angle FFT"
+    - "Detected object"
+  FrameNum:
+    - "Frame Num"
+  LoopNum:
+    - "Loop Num"
+  ChirpNum:
+    - "Chirp Num"
+  LaneNum:
+    - "Lane Num"
+    - "Lane 1"
+    - "Lane 2"
+    - "Lane 3"
+    - "Lane 4"
+  PlotBuild:
+    - "Plot Result"
+    - "Plot"
+  CFAR:
+    - "Guard cell"
+    - "Training cell"
+    - "Probability of false alarm "
+  Navigation:
+    - "Re-configurate"
+    - "Exit"
+Controller:
+  - "Exit with error code: "
+PlotLegend:
+  RangeFFT:
+    - "Range, m"
+    - "Relative power, dB"
+    - "Range FFT"
+    - "1D FFT per chirp Real"
+    - "1D FFT per chirp Image"
+  DopplerFFT:
+    - "Velocity, m/s"
+    - "Range, m"
+    - "Doppler FFT"
+    - "Relative power, dB"
+    - "3d - Doppler FFT"
+  TimeDomain:
+    - "Time, mcs"
+    - "ADC value"
+    - "Time domain"
+    - "real"
+    - "image"
+  CFAR:
+    - "Range, m"
+    - "Relative power, dB"
+    - "Object detection / CA-CFAR"
+    - "threshold"
+    - "Range FFT"
+  AngleFFT:
+    - "Angle, degree"
+    - "Range, m"
+    - "Angle FFT"
+  DetectedObj:
+    - "Range, m"
+    - "Detected objects"
